@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitetura do Stream Deck Mobile (Mi 9)",
+    "output": "diagrams/streamdeck.html",
+    "quality_profile": "showcase",
+    "locale": "pt-BR"
+  },
+  "components": [
+    { "id": "user", "type": "external", "label": "Usuário", "sublabel": "toque na tela", "pos": [40, 215], "size": [110, 60] },
+    { "id": "pwa", "type": "frontend", "label": "PWA React 18", "sublabel": "Swiper · Haptics · Wake Lock", "pos": [220, 205], "size": [170, 80] },
+    { "id": "router", "type": "backend", "label": "FastAPI deck_router", "sublabel": "/ws · /api/trigger", "pos": [520, 195], "size": [170, 100], "tag": "Python" },
+    { "id": "auth", "type": "security", "label": "Pareamento", "sublabel": "auth_service · token", "pos": [520, 40], "size": [170, 64] },
+    { "id": "catalog", "type": "database", "label": "Catálogo & macros", "sublabel": "apps_registry · macro_service", "pos": [520, 380], "size": [170, 64] },
+    { "id": "audio", "type": "backend", "label": "Áudio por processo", "sublabel": "Pycaw", "pos": [840, 40], "size": [170, 64] },
+    { "id": "media", "type": "backend", "label": "Controle de mídia", "sublabel": "WinRT · GSMTC", "pos": [840, 150], "size": [170, 64] },
+    { "id": "window", "type": "backend", "label": "Janelas & processos", "sublabel": "Win32 API", "pos": [840, 260], "size": [170, 64] },
+    { "id": "telemetry", "type": "backend", "label": "Telemetria", "sublabel": "CPU · RAM · rede", "pos": [840, 370], "size": [170, 64] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Celular Xiaomi Mi 9", "wraps": ["pwa"] },
+    { "kind": "region", "label": "PC host: Windows 11", "wraps": ["router", "auth", "catalog", "audio", "media", "window", "telemetry"] }
+  ],
+  "connections": [
+    { "id": "tap", "from": "user", "to": "pwa", "label": "toque" },
+    { "id": "ws-command", "from": "pwa", "to": "router", "label": "WebSocket /ws", "variant": "emphasis" },
+    { "id": "ws-state", "from": "router", "to": "pwa", "label": "estado ao vivo" },
+    { "id": "pairing", "from": "router", "to": "auth", "label": "valida token", "variant": "security" },
+    { "id": "catalog-read", "from": "router", "to": "catalog", "label": "lê botões" },
+    { "id": "audio-call", "from": "router", "to": "audio", "label": "volume" },
+    { "id": "media-call", "from": "router", "to": "media", "label": "play · capa" },
+    { "id": "window-call", "from": "router", "to": "window", "label": "abrir · focar" },
+    { "id": "telemetry-feed", "from": "telemetry", "to": "router", "label": "métricas" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Cliente", "items": ["PWA instalada no Mi 9, servida pelo próprio FastAPI", "Swiper para páginas de botões, vibração háptica e Wake Lock", "Proteção anti burn-in para tela OLED"] },
+    { "dot": "emerald", "title": "Servidor", "items": ["FastAPI com WebSocket bidirecional em /ws", "Serviços isolados por domínio: áudio, mídia, janelas, telemetria", "Contratos validados com Pydantic (deck_schemas)"] },
+    { "dot": "rose", "title": "Segurança", "items": ["Pareamento por token com rotação (/api/v1/deck/pairing)"] }
+  ]
+}

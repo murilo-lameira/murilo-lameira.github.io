@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murilo Lameira | Portfólio</title>
+<meta name="description" content="Engenharia de Controle e Automação: algoritmos genéticos, gêmeos digitais, IoT e software. Portfólio de projetos de Murilo Lameira.">
+<meta property="og:title" content="Murilo Lameira | Portfólio">
+<meta property="og:description" content="Algoritmos genéticos, gêmeos digitais, controle PID, IoT e software.">
+<meta property="og:image" content="assets/img/mirage-map-elites.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#topo"><span class="brand-mark">ML</span> Murilo Lameira</a>
+    <nav class="nav-links" aria-label="Seções">
+      <a href="#mirage">Publicação</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow mono">Engenharia de Controle e Automação · UNISENAI · 8º semestre</p>
+      <h1>Da planta física ao algoritmo que a controla.</h1>
+      <p class="lead">Estudo Engenharia de Controle e Automação no SENAI e faço estágio na Toledo do Brasil. Gosto de juntar duas coisas: o controle de processos que vejo na indústria e a programação. Meus projetos vão de PID e ESP32 a algoritmos genéticos e gêmeos digitais.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/murilo-lameira" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/murilo-lameira" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://github.com/murilo-lameira/Mirage/blob/main/paper/Mirage_Artigo_SENAI.pdf" target="_blank" rel="noopener">Artigo Mirage (PDF)</a>
+      </div>
+      <dl class="stats">
+        <div><dt class="mono">−93,4%</dt><dd>ITAE com PID sintonizado por algoritmo genético</dd></div>
+        <div><dt class="mono">R² 99,7%</dt><dd>gêmeo digital treinado com telemetria real</dd></div>
+        <div><dt class="mono">135.000</dt><dd>combates simulados no estudo do Mirage</dd></div>
+        <div><dt class="mono">IEEE/SBC</dt><dd>short paper como autor principal</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- MIRAGE -->
+  <section id="mirage" class="section">
+    <div class="wrap">
+      <p class="kicker mono">Destaque · Publicação científica</p>
+      <h2>Mirage: NPCs que evoluem sob orçamento</h2>
+      <p class="section-lead">Framework de computação evolucionária que sintetiza comportamentos de esquiva para NPCs em ambientes <em>Bullet Hell</em>. Um orçamento homotético (Σu<sub>i</sub> ≤ 1,8) impede que o algoritmo genético “trapaceie” virando uma esponja de dano e faz surgir três arquétipos de combate.</p>
+
+      <div class="feature">
+        <figure class="media">
+          <img src="assets/img/mirage-demo.gif" alt="NPC do Mirage desviando de projéteis em combate" loading="lazy" width="480" height="360">
+          <figcaption>NPC evoluído em combate</figcaption>
+        </figure>
+        <ul class="results">
+          <li><strong class="mono">−77,5%</strong><span>colisões com cinemática preditiva (CPA + lead-aiming + steering de Reynolds)</span></li>
+          <li><strong class="mono">+103,7%</strong><span>tempo de sobrevivência no nível difícil (23,22 s vs 11,40 s)</span></li>
+          <li><strong class="mono">9/9</strong><span>nichos preenchidos pelo MAP-Elites · QD-Score 39.114,40</span></li>
+          <li><strong class="mono">p ≈ 10⁻³²</strong><span>separação fenotípica por ANOVA (F = 184,55) e Kruskal-Wallis</span></li>
+        </ul>
+      </div>
+
+      <div class="diagram">
+        <div class="diagram-head">
+          <h3>Ciclo evolutivo</h3>
+          <a class="link mono" href="diagrams/mirage.html" target="_blank" rel="noopener">abrir em tela cheia ↗</a>
+        </div>
+        <iframe src="diagrams/mirage.html" title="Diagrama do ciclo evolutivo do Mirage" loading="lazy"></iframe>
+      </div>
+
+      <div class="chips">
+        <span>Python</span><span>NumPy</span><span>SciPy</span><span>Pygame</span><span>MATLAB / Octave</span><span>MAP-Elites</span><span>LaTeX</span>
+      </div>
+      <p class="links">
+        <a class="link" href="https://github.com/murilo-lameira/Mirage" target="_blank" rel="noopener">Repositório</a>
+        <a class="link" href="https://github.com/murilo-lameira/Mirage/blob/main/paper/Mirage_Artigo_SENAI.pdf" target="_blank" rel="noopener">Artigo (PDF)</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos" class="section alt">
+    <div class="wrap">
+      <p class="kicker mono">Projetos</p>
+      <h2>Engenharia de ponta a ponta</h2>
+
+      <!-- Freezer + PID -->
+      <article class="project wide">
+        <div class="project-text">
+          <p class="tag mono">Controle · IoT · IA</p>
+          <h3>Thermal Freezer IoT <span class="arrow">→</span> Genetic PID Tuning</h3>
+          <p>Dois projetos que formam um ciclo completo. Um ESP32 controla uma pastilha Peltier por PID e publica telemetria via MQTT para um supervisório Node-RED, chegando a −19 °C. Com essa telemetria real, treinei um gêmeo digital e deixei um algoritmo genético sintonizar o controlador em 100 gerações, minimizando o ITAE.</p>
+          <ul class="facts">
+            <li>Gêmeo digital com <strong>R² 99,7%</strong> e erro médio de 0,38 °C</li>
+            <li>Ganhos encontrados: <span class="mono">Kp 22,26 · Ki 0,02 · Kd 3,55</span></li>
+            <li>Na Planta Multiprocesso SENAI (OPC UA / Elipse E3): <strong>ITAE −93,4%</strong>, 0% de sobressinal e acomodação 4× mais rápida que IMC (143,5 s vs 561,5 s)</li>
+          </ul>
+          <div class="chips"><span>C++</span><span>ESP32</span><span>MQTT</span><span>Node-RED</span><span>Python</span><span>scikit-learn</span><span>Altair Compose</span></div>
+          <p class="links">
+            <a class="link" href="https://github.com/murilo-lameira/Thermal-Freezer-IoT" target="_blank" rel="noopener">Thermal Freezer IoT</a>
+            <a class="link" href="https://github.com/murilo-lameira/genetic-pid-tuning" target="_blank" rel="noopener">Genetic PID Tuning</a>
+          </p>
+        </div>
+        <figure class="media">
+          <img src="assets/img/pid-resposta.png" alt="Resposta ao degrau e ação de controle do PID sintonizado geneticamente" loading="lazy" width="2000" height="823">
+          <figcaption>Resposta ao degrau sem sobressinal e ação de controle da Peltier</figcaption>
+        </figure>
+        <div class="diagram full">
+          <div class="diagram-head">
+            <h3>Fluxo de dados: da planta aos ganhos ótimos</h3>
+            <a class="link mono" href="diagrams/freezer-pid.html" target="_blank" rel="noopener">abrir em tela cheia ↗</a>
+          </div>
+          <iframe src="diagrams/freezer-pid.html" title="Diagrama de fluxo de dados do Thermal Freezer ao Genetic PID" loading="lazy"></iframe>
+        </div>
+      </article>
+
+      <!-- StreamDeck -->
+      <article class="project wide">
+        <div class="project-text">
+          <p class="tag mono">Software · Windows · Mobile</p>
+          <h3>Stream Deck Mobile (Mi 9)</h3>
+          <p>Transforma um smartphone antigo em controlador para o Windows 11: abre e foca aplicativos, controla mídia e o volume de cada processo e mostra telemetria do PC. O celular roda uma PWA em React conectada por WebSocket a um servidor FastAPI que fala com as APIs nativas do Windows.</p>
+          <ul class="facts">
+            <li>Áudio por processo com Pycaw, mídia via WinRT e janelas via Win32</li>
+            <li>Pareamento por token com rotação</li>
+            <li>Ergonomia para o Mi 9: Swiper, vibração háptica, Wake Lock e proteção anti burn-in para OLED</li>
+          </ul>
+          <div class="chips"><span>FastAPI</span><span>WebSockets</span><span>React 18</span><span>PWA</span><span>Win32 API</span><span>Pycaw</span></div>
+          <p class="links"><a class="link" href="https://github.com/murilo-lameira/Stream-Deck" target="_blank" rel="noopener">Repositório</a></p>
+        </div>
+        <figure class="media">
+          <img src="assets/img/streamdeck-mi9.png" alt="Xiaomi Mi 9 em um suporte exibindo a grade de botões do Stream Deck" loading="lazy" width="930" height="572">
+          <figcaption>O Mi 9 como Stream Deck na mesa</figcaption>
+        </figure>
+        <div class="diagram full">
+          <div class="diagram-head">
+            <h3>Arquitetura</h3>
+            <a class="link mono" href="diagrams/streamdeck.html" target="_blank" rel="noopener">abrir em tela cheia ↗</a>
+          </div>
+          <iframe src="diagrams/streamdeck.html" title="Diagrama de arquitetura do Stream Deck Mobile" loading="lazy"></iframe>
+        </div>
+      </article>
+
+      <!-- Menores -->
+      <div class="grid">
+        <article class="card">
+          <p class="tag mono">Automação · Dados</p>
+          <h3>Bidding Monitor Automation</h3>
+          <p>Pipeline em n8n que varre portais de compras do setor de gás e energia (PNCP, Petronect e portais próprios), filtra editais por termos técnicos, pontua a relevância, remove duplicados e entrega um relatório em Excel.</p>
+          <div class="chips"><span>n8n</span><span>JavaScript</span><span>REST APIs</span><span>Web scraping</span></div>
+          <a class="link" href="https://github.com/murilo-lameira/bidding-monitor-automation" target="_blank" rel="noopener">Repositório</a>
+        </article>
+        <article class="card">
+          <p class="tag mono">Sistemas · Windows</p>
+          <h3>Projeto CheckUP Windows</h3>
+          <p>Aplicativo de diagnóstico e reparo do Windows que verifica bateria, S.M.A.R.T., rede e memória usando só ferramentas nativas do sistema e gera relatórios em HTML.</p>
+          <div class="chips"><span>Electron</span><span>PowerShell</span><span>WMI/CIM</span><span>JavaScript</span></div>
+          <a class="link" href="https://github.com/murilo-lameira/projeto-checkup-windows" target="_blank" rel="noopener">Repositório</a>
+        </article>
+        <article class="card">
+          <p class="tag mono">Dados · CLI</p>
+          <h3>LoL Elo Tracker</h3>
+          <p>Aplicação de terminal em Python para acompanhar a evolução de ranqueadas: CRUD em SQLite, leaderboard ordenado por SQL e interface colorida em tabelas.</p>
+          <div class="chips"><span>Python</span><span>SQLite</span><span>CLI</span></div>
+          <a class="link" href="https://github.com/murilo-lameira/lol-elo-tracker" target="_blank" rel="noopener">Repositório</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section id="experiencia" class="section">
+    <div class="wrap two-col">
+      <div>
+        <p class="kicker mono">Experiência</p>
+        <h2>Onde apliquei isso</h2>
+        <ol class="timeline">
+          <li>
+            <p class="when mono">set/2026 até hoje</p>
+            <h3>Toledo do Brasil</h3>
+            <p class="role">Estagiário de Engenharia · Fast Factory &amp; Automação</p>
+            <p>Automação de fluxos de engenharia com Power Automate, suporte a projetos industriais, KPIs operacionais e documentação técnica.</p>
+          </li>
+          <li>
+            <p class="when mono">abr/2026 a set/2026</p>
+            <h3>FTS Serviços Especializados de Manutenção</h3>
+            <p class="role">Estagiário de Engenharia</p>
+            <p>Agentes de IA para fluxos comerciais e operacionais, dashboards em Power BI (DAX) e ETL em VBA/Excel.</p>
+          </li>
+          <li>
+            <p class="when mono">fev/2024 a out/2025</p>
+            <h3>SSI Automação</h3>
+            <p class="role">Consultor Técnico</p>
+            <p>Automatizou a emissão de laudos de segurança de máquinas (NR-12), reduzindo o tempo operacional em 30%, com aplicação interna em Python e MySQL.</p>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <p class="kicker mono">Formação</p>
+        <h2>Base</h2>
+        <ul class="plain">
+          <li><strong>Engenharia de Controle e Automação</strong><br>Centro Universitário SENAI SP (UNISENAI) · 2023 a 2027</li>
+          <li><strong>Técnico em Eletroeletrônica</strong><br>Escola SENAI A. Jacob Lafer · 2018 a 2020</li>
+          <li><strong>Certificações</strong><br>Lean Seis Sigma Yellow Belt · AWS Academy Graduate (Cloud Foundations) · Python 3 &amp; Collections</li>
+        </ul>
+        <p class="kicker mono stack-title">Ferramentas</p>
+        <div class="chips">
+          <span>Python</span><span>C++</span><span>JavaScript</span><span>MATLAB / Octave</span><span>SQL</span><span>PowerShell</span><span>LaTeX</span>
+          <span>Power BI</span><span>Power Automate</span><span>NumPy</span><span>SciPy</span><span>Pandas</span><span>scikit-learn</span>
+          <span>ESP32</span><span>MQTT</span><span>Node-RED</span><span>OPC UA / Elipse E3</span><span>n8n</span><span>FastAPI</span><span>AWS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section contact">
+    <div class="wrap">
+      <h2>Vamos conversar?</h2>
+      <p class="section-lead">Se você trabalha com controle, automação industrial, IA ou dados, me chama. Estou aberto a oportunidades e projetos.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/murilo-lameira" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:murilolameira14@gmail.com">murilolameira14@gmail.com</a>
+        <a class="btn" href="https://github.com/murilo-lameira" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap mono">ABC Paulista, SP · Diagramas gerados com <a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">Archify</a></div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Mirage: ciclo evolutivo dos NPCs",
+    "output": "diagrams/mirage.html",
+    "quality_profile": "showcase",
+    "locale": "pt-BR"
+  },
+  "lanes": [
+    { "id": "ga", "label": "Algoritmo genético" },
+    { "id": "sim", "label": "Simulação Bullet Hell" },
+    { "id": "analysis", "label": "Análise científica" }
+  ],
+  "phases": [
+    { "id": "evolve", "label": "Evolução sob orçamento", "fromCol": 0, "toCol": 3, "variant": "emphasis" },
+    { "id": "evaluate", "label": "Resultados", "fromCol": 4, "toCol": 5 }
+  ],
+  "mainPath": ["init", "episode", "fitness", "stop", "champions", "stats"],
+  "nodes": [
+    { "id": "init", "lane": "ga", "col": 0, "type": "backend", "label": "População inicial", "sublabel": "genes u_i ∈ [0, 1]", "tag": "Σu ≤ 1,8" },
+    { "id": "episode", "lane": "sim", "col": 1, "type": "frontend", "label": "Episódio de combate", "sublabel": "20 Hz · até 30 s", "tag": "CPA + steering" },
+    { "id": "fitness", "lane": "sim", "col": 2, "type": "backend", "label": "Aptidão", "sublabel": "desempenho no episódio" },
+    { "id": "stop", "lane": "ga", "col": 3, "type": "security", "label": "Estagnou?", "sublabel": "15 gerações, ganho < 1%", "icon": "decision" },
+    { "id": "repro", "lane": "ga", "col": 2, "type": "backend", "label": "Reprodução", "sublabel": "torneio · BLX-α · mutação", "tag": "projeção homotética" },
+    { "id": "champions", "lane": "analysis", "col": 4, "type": "database", "label": "Campeões", "sublabel": "fácil · médio · difícil" },
+    { "id": "stats", "lane": "analysis", "col": 5, "type": "backend", "label": "Estatística", "sublabel": "ANOVA · Kruskal-Wallis", "icon": "success" }
+  ],
+  "edges": [
+    { "id": "evaluate-pop", "from": "init", "to": "episode", "label": "avaliar", "variant": "emphasis" },
+    { "id": "score", "from": "episode", "to": "fitness" },
+    { "id": "check", "from": "fitness", "to": "stop" },
+    { "id": "keep-evolving", "from": "stop", "to": "repro", "label": "não", "role": "branch" },
+    { "id": "next-gen", "from": "repro", "to": "episode", "label": "nova geração", "role": "return", "variant": "dashed" },
+    { "id": "converged", "from": "stop", "to": "champions", "label": "sim ou 50 ger.", "variant": "emphasis" },
+    { "id": "compare", "from": "champions", "to": "stats", "label": "N = 90" }
+  ],
+  "cards": [
+    { "dot": "amber", "title": "Orçamento homotético", "items": ["Toda prole é projetada para Σu_i ≤ 1,8", "Impede o colapso em esponjas de dano e leva os campeões à fronteira de Pareto"] },
+    { "dot": "cyan", "title": "Cinemática preditiva", "items": ["CPA + lead-aiming + steering de Reynolds", "−77,5% de colisões e +103,7% de sobrevivência no nível difícil"] },
+    { "dot": "emerald", "title": "Rigor estatístico", "items": ["MAP-Elites preenche 9/9 nichos (QD-Score 39.114,40)", "ANOVA F = 184,55 · p = 2,12×10⁻³²"] }
+  ]
+}

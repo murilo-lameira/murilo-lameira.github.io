@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Fluxo de dados: Thermal Freezer IoT → Genetic PID Tuning",
+    "output": "diagrams/freezer-pid.html",
+    "quality_profile": "showcase",
+    "locale": "pt-BR"
+  },
+  "stages": [
+    { "label": "Planta física" },
+    { "label": "Mensageria" },
+    { "label": "Supervisório e dados" },
+    { "label": "Gêmeo digital" },
+    { "label": "Otimização" }
+  ],
+  "nodes": [
+    { "id": "sensor", "type": "external", "label": "DS18B20", "sublabel": "sensor OneWire", "stage": 0, "row": 0 },
+    { "id": "esp32", "type": "backend", "label": "ESP32", "sublabel": "PID em C++", "stage": 0, "row": 1, "tag": "PlatformIO" },
+    { "id": "peltier", "type": "external", "label": "Peltier", "sublabel": "MOSFET + fan", "stage": 0, "row": 2 },
+    { "id": "broker", "type": "messagebus", "label": "Mosquitto", "sublabel": "geladeira/#", "stage": 1, "row": 1, "tag": "MQTT" },
+    { "id": "nodered", "type": "frontend", "label": "Node-RED", "sublabel": "dashboard", "stage": 2, "row": 0 },
+    { "id": "dataset", "type": "database", "label": "Dataset CSV", "sublabel": "db_thermal_freezer", "stage": 2, "row": 2 },
+    { "id": "twin", "type": "backend", "label": "Gêmeo digital", "sublabel": "scikit-learn", "stage": 3, "row": 1, "tag": "R² 99,7%" },
+    { "id": "ga", "type": "backend", "label": "Algoritmo genético", "sublabel": "100 gerações", "stage": 4, "row": 1, "tag": "ITAE" }
+  ],
+  "flows": [
+    { "id": "temp-read", "from": "sensor", "to": "esp32", "label": "°C" },
+    { "id": "pwm-out", "from": "esp32", "to": "peltier", "label": "PWM" },
+    { "id": "telemetry", "from": "esp32", "to": "broker", "label": "telemetria", "variant": "emphasis" },
+    { "id": "to-dashboard", "from": "broker", "to": "nodered", "label": "sensores/*" },
+    { "id": "from-dashboard", "from": "nodered", "to": "broker", "label": "setpoint · ganhos" },
+    { "id": "to-esp32", "from": "broker", "to": "esp32", "label": "controle/*" },
+    { "id": "history", "from": "broker", "to": "dataset", "label": "histórico", "variant": "dashed" },
+    { "id": "train", "from": "dataset", "to": "twin", "label": "PWM × °C", "variant": "emphasis" },
+    { "id": "simulate", "from": "twin", "to": "ga", "label": "planta virtual", "variant": "emphasis" },
+    { "id": "gains", "from": "ga", "to": "nodered", "label": "Kp Ki Kd ótimos", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Planta física", "items": ["ESP32 lê o DS18B20 e aciona a Peltier por PWM via MOSFET", "Telemetria e comandos trafegam em tópicos MQTT geladeira/sensores e geladeira/controle", "Setpoint e ganhos podem ser alterados em tempo real pelo dashboard"] },
+    { "dot": "emerald", "title": "Gêmeo digital", "items": ["Modelo de regressão treinado com a telemetria real (PWM aplicado × temperatura)", "R² de 99,7% e erro médio de 0,38 °C"] },
+    { "dot": "amber", "title": "Sintonia genética", "items": ["Torneio, crossover aritmético e mutação, 100 gerações", "Fitness pelo ITAE, penalizando overshoot e instabilidade", "Resultado: Kp 22,26 · Ki 0,02 · Kd 3,55, levados de volta à planta pelo dashboard"] }
+  ]
+}
