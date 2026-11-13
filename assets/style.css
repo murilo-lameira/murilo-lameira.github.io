@@ -176,6 +176,24 @@ p { margin: 0; }
 .plain strong { color: var(--text); }
 .stack-title { margin-top: 36px; }
 
+/* POSTS */
+.post-list { display: grid; gap: 20px; margin-top: 40px; }
+.post-card { display: block; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: border-color .15s, transform .15s; }
+.post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.post-card .when { margin-bottom: 8px; }
+.post-card h3 { font-size: 21px; }
+.post-card p:last-child { margin-top: 10px; color: var(--muted); max-width: 70ch; }
+
+.post { padding: 64px 0 88px; }
+.post-wrap { max-width: 760px; }
+.post h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; }
+.post-lead { margin-top: 20px; font-size: 19px; color: var(--muted); }
+.post h2 { font-size: 24px; margin-top: 44px; }
+.post p { margin-top: 16px; font-size: 17px; line-height: 1.75; }
+.post-code { padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--accent); font-size: 15px; overflow-x: auto; }
+.post-figure { margin-top: 32px; box-shadow: none; }
+.post .facts li { font-size: 17px; }
+
 /* CONTACT */
 .contact { text-align: left; border-top: 1px solid var(--border); }
 .footer { padding: 28px 0; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }

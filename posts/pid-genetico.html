@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deixei um algoritmo genético sintonizar meu PID | Murilo Lameira</title>
+<meta name="description" content="Como usei a telemetria de uma geladeira com Peltier para treinar um gêmeo digital e sintonizar o PID com um algoritmo genético.">
+<meta property="og:title" content="Deixei um algoritmo genético sintonizar meu PID">
+<meta property="og:image" content="../assets/img/pid-resposta.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">ML</span> Murilo Lameira</a>
+    <nav class="nav-links" aria-label="Seções">
+      <a href="../index.html#projetos">Projetos</a>
+      <a href="../index.html#posts">Posts</a>
+      <a href="../index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="post">
+  <div class="wrap post-wrap">
+    <p class="kicker mono">13 nov 2026 · 4 min de leitura</p>
+    <h1>Deixei um algoritmo genético sintonizar meu PID</h1>
+    <p class="post-lead">Sintonizar PID de sistema térmico na mão é lento. Cada teste leva minutos, a planta demora para responder e você fica ajustando Kp, Ki e Kd no feeling. Resolvi testar outra abordagem: usar os dados da própria planta para criar um modelo e deixar o computador procurar os ganhos.</p>
+
+    <h2>A planta</h2>
+    <p>O ponto de partida foi o <a class="link" href="https://github.com/murilo-lameira/Thermal-Freezer-IoT" target="_blank" rel="noopener">Thermal Freezer IoT</a>, uma geladeira com pastilha Peltier que montei com um ESP32. O sensor DS18B20 lê a temperatura, o ESP32 roda o PID em C++ e aciona a Peltier por PWM através de um MOSFET. Toda a telemetria vai por MQTT para um dashboard no Node-RED, de onde também dá para mudar o setpoint e os ganhos em tempo real. Ela chegou a −19 °C.</p>
+    <p>O problema clássico apareceu: sistema térmico tem muita inércia e atraso. Mexer nos ganhos e esperar a resposta toma tempo, e é fácil cair em oscilação ou sobressinal.</p>
+
+    <h2>Primeiro passo: um gêmeo digital</h2>
+    <p>Em vez de testar ganhos na planta real, peguei o histórico de operação (PWM aplicado e temperatura medida) e treinei um modelo de regressão com scikit-learn. Esse modelo virou o gêmeo digital: dado o PWM, ele prevê como a temperatura vai se comportar.</p>
+    <p>Ele acertou bem. O R² ficou em <strong>99,7%</strong> e o erro médio em <strong>0,38 °C</strong>. Com isso eu tinha uma planta virtual para testar quantos PIDs quisesse, em segundos.</p>
+
+    <h2>Segundo passo: a evolução</h2>
+    <p>Escrevi o algoritmo genético do zero em NumPy. Cada indivíduo é um trio (Kp, Ki, Kd). Para avaliar um indivíduo, simulo a resposta ao degrau no gêmeo digital e calculo o <span class="mono">ITAE</span> (integral do tempo vezes o erro absoluto). O ITAE pesa mais os erros que demoram a sumir, então castiga oscilação e sobressinal.</p>
+    <p>A cada geração: seleção por torneio, crossover aritmético e mutação. Depois de 100 gerações, ele convergiu para:</p>
+    <p class="post-code mono">Kp = 22,26 · Ki = 0,02 · Kd = 3,55</p>
+    <p>Faz sentido olhando para a planta. O Kp alto vence a inércia térmica, o Ki baixo evita windup e o Kd amortece a chegada no setpoint.</p>
+
+    <figure class="media post-figure">
+      <img src="../assets/img/pid-resposta.png" alt="Gráfico da resposta ao degrau chegando a 10 °C sem sobressinal e da ação de controle PWM da Peltier" width="2000" height="823">
+      <figcaption>Resposta ao degrau com os ganhos encontrados: chega ao setpoint sem sobressinal.</figcaption>
+    </figure>
+
+    <h2>E numa planta industrial?</h2>
+    <p>Depois apliquei a mesma ideia na Planta Industrial Multiprocesso do SENAI, via OPC UA e Elipse E3. Lá o gêmeo digital chegou a R² de 99,96%. Comparando com a sintonia IMC, o PID genético reduziu o ITAE em <strong>93,4%</strong>, ficou com 0% de sobressinal e acomodou em 143,5 s contra 561,5 s. Conferi a estabilidade pelo critério de Routh-Hurwitz antes de confiar no resultado.</p>
+
+    <h2>O que eu levo disso</h2>
+    <ul class="facts">
+      <li>Dado de operação real vale ouro. Sem a telemetria do MQTT não teria gêmeo digital.</li>
+      <li>A função de custo é a decisão mais importante. Trocar o ITAE por outro critério muda completamente os ganhos.</li>
+      <li>O algoritmo genético não substitui teoria de controle. Ele acha um bom ponto, mas a análise de estabilidade continua sendo obrigatória.</li>
+    </ul>
+
+    <p class="links">
+      <a class="link" href="https://github.com/murilo-lameira/genetic-pid-tuning" target="_blank" rel="noopener">Código do Genetic PID Tuning</a>
+      <a class="link" href="../diagrams/freezer-pid.html" target="_blank" rel="noopener">Diagrama do fluxo de dados</a>
+      <a class="link" href="../index.html#posts">Voltar aos posts</a>
+    </p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap mono">Murilo Lameira · ABC Paulista, SP</div>
+</footer>
+
+</body>
+</html>
