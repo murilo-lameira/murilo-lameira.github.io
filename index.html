@@ -139,14 +139,31 @@
             <li>Áudio por processo com Pycaw, mídia via WinRT e janelas via Win32</li>
             <li>Pareamento por token com rotação</li>
             <li>Ergonomia para o Mi 9: Swiper, vibração háptica, Wake Lock e proteção anti burn-in para OLED</li>
+            <li>Integração com o Claude Code: os limites de uso da conta aparecem no celular, e os pedidos de permissão do agente são aprovados ou negados com um toque (hook PermissionRequest)</li>
           </ul>
-          <div class="chips"><span>FastAPI</span><span>WebSockets</span><span>React 18</span><span>PWA</span><span>Win32 API</span><span>Pycaw</span></div>
+          <div class="chips"><span>FastAPI</span><span>WebSockets</span><span>React 18</span><span>PWA</span><span>Win32 API</span><span>Pycaw</span><span>Claude Code hooks</span></div>
           <p class="links"><a class="link" href="https://github.com/murilo-lameira/Stream-Deck" target="_blank" rel="noopener">Repositório</a></p>
         </div>
         <figure class="media">
-          <img src="assets/img/streamdeck-mi9.png" alt="Xiaomi Mi 9 em um suporte exibindo a grade de botões do Stream Deck" loading="lazy" width="930" height="572">
-          <figcaption>O Mi 9 como Stream Deck na mesa</figcaption>
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/img/streamdeck-tour.jpg" width="2340" height="1080" aria-label="Tour pela interface do Stream Deck: limites do Claude, grade de aplicativos, controle de mídia e volume">
+            <source src="assets/video/tour.webm" type="video/webm">
+            <source src="assets/video/tour.mp4" type="video/mp4">
+          </video>
+          <figcaption>Tour pela interface: limites do Claude, aplicativos, mídia e volume por processo</figcaption>
         </figure>
+        <div class="media-row">
+          <figure class="media">
+            <img src="assets/img/streamdeck-mi9.png" alt="Xiaomi Mi 9 em um suporte exibindo a grade de botões do Stream Deck" loading="lazy" width="930" height="572">
+            <figcaption>O Mi 9 como Stream Deck na mesa</figcaption>
+          </figure>
+          <figure class="media">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/img/streamdeck-claude.jpg" width="2340" height="1080" aria-label="O Claude Code pede permissão para rodar um comando e o pedido é aprovado pelo celular">
+              <source src="assets/video/pedido-claude.webm" type="video/webm">
+              <source src="assets/video/pedido-claude.mp4" type="video/mp4">
+            </video>
+            <figcaption>O Claude Code pede permissão e o celular aprova</figcaption>
+          </figure>
+        </div>
         <div class="diagram full">
           <div class="diagram-head">
             <h3>Arquitetura</h3>
